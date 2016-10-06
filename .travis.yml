@@ -1,9 +1,19 @@
 language: elixir
-services:
-  - cassandra
 elixir:
   - 1.3.3
 otp_release:
   - 19.1.1
 git:
   depth: 1
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+before_install:
+  - update-java-alternatives -s java-8-oracle
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - java -version
+  - rm -rf /var/lib/cassandra/*
+  - wget http://www.us.apache.org/dist/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz && tar -xvzf apache-cassandra-3.9-bin.tar.gz
+  - sh ./apache-cassandra-3.9/bin/cassandra -R
+  - sleep 20
