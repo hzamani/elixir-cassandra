@@ -1,4 +1,6 @@
 language: elixir
+services:
+  - cassandra
 elixir:
   - 1.3.3
 otp_release:
